@@ -1,0 +1,28 @@
+# Kubernetes API version
+apiVersion: apps/v1
+# Deployment object
+kind: Deployment
+metadata:
+  # The name of the Deployment
+  name: demo
+spec:
+  # Replicas for this Deployment
+  replicas: 1
+  selector:
+    # labels the pods
+    matchLabels:
+      app: demo
+  template:
+    metadata:
+      labels:
+        # The label the pods created from the pod template should have
+        app: demo
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: ip-172-31-14-153
+      containers:
+        # The container name to execute pods
+        - name: demo
+          # pull demo from docker hub
+          image: prakakrishna/demo:1.0
+          imagePullPolicy: Always
